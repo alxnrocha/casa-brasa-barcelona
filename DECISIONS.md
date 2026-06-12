@@ -31,6 +31,19 @@ transparentes y facilitar su uso responsive.
 La paleta inicial combina crema, carbón, vino, terracota y verde oliva para
 mantener una dirección mediterránea contemporánea.
 
+## Imagen del hero
+
+La fotografía principal muestra pulpo a la brasa y procede de Unsplash. Fue
+realizada por Paolo Bici y se almacena localmente en formato WebP para evitar
+una dependencia externa durante la ejecución.
+
+Fuente:
+https://unsplash.com/photos/grilled-octopus-tentacles-served-in-a-creamy-sauce-e14csf8Cuvw
+
+La composición utiliza un degradado lateral para mantener la legibilidad del
+texto en desktop. En móvil, texto e imagen se presentan como bloques separados
+para evitar superposiciones y conservar el foco gastronómico de la fotografía.
+
 ## Alcance
 
 El proyecto no tendrá backend, autenticación, pagos ni pedidos reales. La
