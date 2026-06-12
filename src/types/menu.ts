@@ -16,19 +16,40 @@ export type Allergen =
   | 'soja'
   | 'lacteos'
   | 'frutos-secos'
+  | 'apio'
+  | 'mostaza'
+  | 'sesamo'
+  | 'sulfitos'
+  | 'moluscos'
 
 export type SpicyLevel = 0 | 1 | 2 | 3
 
 export type MenuItem = {
   id: string
+  slug: string
   name: string
   description: string
   category: MenuCategory
   price: number
-  image: string
-  ingredients: string[]
-  allergens: Allergen[]
-  dietaryTags: DietaryTag[]
+  imageId: string
+  ingredients: readonly string[]
+  allergens: readonly Allergen[]
+  dietaryTags: readonly DietaryTag[]
   spicyLevel: SpicyLevel
   featured: boolean
+}
+
+export type MenuCategoryOption = {
+  id: MenuCategory
+  label: string
+}
+
+export type DietaryTagOption = {
+  id: DietaryTag
+  label: string
+}
+
+export type AllergenOption = {
+  id: Allergen
+  label: string
 }
