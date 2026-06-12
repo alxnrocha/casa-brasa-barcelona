@@ -1,5 +1,5 @@
 import { Clock3, MapPin, Utensils } from 'lucide-react'
-import { BrandLogo } from './components/BrandLogo'
+import { Header } from './components/Header'
 
 const projectDetails = [
   {
@@ -21,16 +21,11 @@ const projectDetails = [
 
 export function App() {
   return (
-    <main className="min-h-screen bg-cream text-charcoal">
-      <section className="mx-auto flex min-h-screen max-w-6xl flex-col px-6 py-8 sm:px-10 lg:px-16">
-        <header className="flex items-center justify-between border-b border-charcoal/15 pb-6">
-          <BrandLogo />
-          <span className="rounded-full border border-wine/25 bg-white/40 px-4 py-2 text-xs font-bold uppercase tracking-[0.18em] text-wine">
-            Proyecto en preparación
-          </span>
-        </header>
-
-        <div className="grid flex-1 items-center gap-14 py-16 lg:grid-cols-[1.15fr_0.85fr] lg:py-24">
+    <div className="min-h-screen bg-cream text-charcoal">
+      <Header />
+      <main id="inicio">
+        <section className="mx-auto flex min-h-[calc(100vh-5rem)] max-w-6xl flex-col px-6 sm:px-10 lg:px-16">
+          <div className="grid flex-1 items-center gap-14 py-16 lg:grid-cols-[1.15fr_0.85fr] lg:py-24">
           <div>
             <p className="mb-5 text-xs font-bold uppercase tracking-[0.24em] text-wine">
               Casa Brasa Barcelona
@@ -65,12 +60,13 @@ export function App() {
               ))}
             </ul>
           </aside>
-        </div>
+          </div>
 
-        <footer className="border-t border-charcoal/15 pt-6 text-sm text-charcoal/55">
-          Proyecto ficticio de portfolio. No representa un restaurante real.
-        </footer>
-      </section>
-    </main>
+          <footer className="border-t border-charcoal/15 py-6 text-sm text-charcoal/55">
+            Proyecto ficticio de portfolio. No representa un restaurante real.
+          </footer>
+        </section>
+      </main>
+    </div>
   )
 }
