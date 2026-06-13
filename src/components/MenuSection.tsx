@@ -1,18 +1,35 @@
 import { useRef, useState } from 'react'
 import { menuCategories, menuItems } from '../data/menu'
 import type { MenuCategory, MenuItem } from '../types/menu'
+import { normalizeSearchText } from '../utils/search'
 import { DishModal } from './DishModal'
+import { EmptyState } from './EmptyState'
 import { MenuGrid } from './MenuGrid'
+import { SearchBar } from './SearchBar'
 
 export function MenuSection() {
   const [activeCategory, setActiveCategory] =
     useState<MenuCategory>('entrantes')
+  const [searchQuery, setSearchQuery] = useState('')
   const [selectedItem, setSelectedItem] = useState<MenuItem | null>(null)
   const detailTriggerRef = useRef<HTMLButtonElement | null>(null)
 
-  const visibleItems = menuItems.filter(
-    (item) => item.category === activeCategory,
-  )
+  const normalizedQuery = normalizeSearchText(searchQuery)
+  const visibleItems = menuItems.filter((item) => {
+    if (item.category !== activeCategory) {
+      return false
+    }
+
+    if (!normalizedQuery) {
+      return true
+    }
+
+    const searchableText = normalizeSearchText(
+      [item.name, item.description, ...item.ingredients].join(' '),
+    )
+
+    return searchableText.includes(normalizedQuery)
+  })
 
   const openDetails = (item: MenuItem, trigger: HTMLButtonElement) => {
     detailTriggerRef.current = trigger
@@ -47,7 +64,14 @@ export function MenuSection() {
           </p>
         </div>
 
-        <div className="mt-10 overflow-x-auto pb-2">
+        <div className="mt-10 grid gap-4 lg:grid-cols-[minmax(0,31rem)_1fr] lg:items-center">
+          <SearchBar
+            value={searchQuery}
+            onChange={setSearchQuery}
+            onClear={() => setSearchQuery('')}
+          />
+
+          <div className="overflow-x-auto pb-2 lg:justify-self-end">
           <nav
             className="flex min-w-max gap-2"
             aria-label="Categorías de la carta"
@@ -72,6 +96,7 @@ export function MenuSection() {
               )
             })}
           </nav>
+          </div>
         </div>
 
         <div
@@ -88,7 +113,14 @@ export function MenuSection() {
               Precios con IVA incluido
             </p>
           </div>
-          <MenuGrid items={visibleItems} onViewDetails={openDetails} />
+          {visibleItems.length > 0 ? (
+            <MenuGrid items={visibleItems} onViewDetails={openDetails} />
+          ) : (
+            <EmptyState
+              query={searchQuery}
+              onReset={() => setSearchQuery('')}
+            />
+          )}
         </div>
       </div>
       <DishModal item={selectedItem} onClose={closeDetails} />
