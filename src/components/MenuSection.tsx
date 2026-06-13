@@ -1,15 +1,28 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { menuCategories, menuItems } from '../data/menu'
-import type { MenuCategory } from '../types/menu'
+import type { MenuCategory, MenuItem } from '../types/menu'
+import { DishModal } from './DishModal'
 import { MenuGrid } from './MenuGrid'
 
 export function MenuSection() {
   const [activeCategory, setActiveCategory] =
     useState<MenuCategory>('entrantes')
+  const [selectedItem, setSelectedItem] = useState<MenuItem | null>(null)
+  const detailTriggerRef = useRef<HTMLButtonElement | null>(null)
 
   const visibleItems = menuItems.filter(
     (item) => item.category === activeCategory,
   )
+
+  const openDetails = (item: MenuItem, trigger: HTMLButtonElement) => {
+    detailTriggerRef.current = trigger
+    setSelectedItem(item)
+  }
+
+  const closeDetails = () => {
+    setSelectedItem(null)
+    requestAnimationFrame(() => detailTriggerRef.current?.focus())
+  }
 
   return (
     <section
@@ -75,9 +88,10 @@ export function MenuSection() {
               Precios con IVA incluido
             </p>
           </div>
-          <MenuGrid items={visibleItems} />
+          <MenuGrid items={visibleItems} onViewDetails={openDetails} />
         </div>
       </div>
+      <DishModal item={selectedItem} onClose={closeDetails} />
     </section>
   )
 }

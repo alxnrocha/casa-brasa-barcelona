@@ -4,6 +4,10 @@ import type { MenuItem } from '../types/menu'
 
 type MenuCardProps = {
   item: MenuItem
+  onViewDetails: (
+    item: MenuItem,
+    trigger: HTMLButtonElement,
+  ) => void
 }
 
 const priceFormatter = new Intl.NumberFormat('es-ES', {
@@ -11,7 +15,7 @@ const priceFormatter = new Intl.NumberFormat('es-ES', {
   currency: 'EUR',
 })
 
-export function MenuCard({ item }: MenuCardProps) {
+export function MenuCard({ item, onViewDetails }: MenuCardProps) {
   const image = menuImages[item.imageId]
   const isVegetarian = item.dietaryTags.includes('vegetariano')
   const isVegan = item.dietaryTags.includes('vegano')
@@ -77,10 +81,15 @@ export function MenuCard({ item }: MenuCardProps) {
           <p className="text-base font-bold text-charcoal">
             {priceFormatter.format(item.price)}
           </p>
-          <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-wine">
+          <button
+            type="button"
+            className="inline-flex min-h-9 cursor-pointer items-center gap-1.5 rounded-md px-2 text-xs font-semibold text-wine transition-colors hover:bg-wine/6 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-wine"
+            aria-label={`Ver detalle de ${item.name}`}
+            onClick={(event) => onViewDetails(item, event.currentTarget)}
+          >
             Ver detalle
             <ArrowRight aria-hidden="true" size={14} strokeWidth={1.8} />
-          </span>
+          </button>
         </div>
       </div>
     </article>
