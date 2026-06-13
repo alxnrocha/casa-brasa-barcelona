@@ -1,6 +1,7 @@
 import { Header } from './components/Header'
 import { Hero } from './components/Hero'
 import { MenuSection } from './components/MenuSection'
+import { RestaurantInfo } from './components/RestaurantInfo'
 
 export function App() {
   return (
@@ -9,6 +10,7 @@ export function App() {
       <main id="inicio">
         <Hero />
         <MenuSection />
+        <RestaurantInfo />
       </main>
     </div>
   )
