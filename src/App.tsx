@@ -1,3 +1,4 @@
+import { Footer } from './components/Footer'
 import { Header } from './components/Header'
 import { Hero } from './components/Hero'
 import { MenuSection } from './components/MenuSection'
@@ -12,6 +13,7 @@ export function App() {
         <MenuSection />
         <RestaurantInfo />
       </main>
+      <Footer />
     </div>
   )
 }
