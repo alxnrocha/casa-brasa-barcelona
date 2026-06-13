@@ -1,9 +1,22 @@
 import { useRef, useState } from 'react'
-import { menuCategories, menuItems } from '../data/menu'
-import type { MenuCategory, MenuItem } from '../types/menu'
+import {
+  allergenOptions,
+  dietaryTagOptions,
+  menuCategories,
+  menuItems,
+} from '../data/menu'
+import type {
+  Allergen,
+  DietaryTag,
+  MenuCategory,
+  MenuItem,
+  PriceRange,
+} from '../types/menu'
 import { normalizeSearchText } from '../utils/search'
+import { ActiveFilters, type ActiveFilter } from './ActiveFilters'
 import { DishModal } from './DishModal'
 import { EmptyState } from './EmptyState'
+import { FilterPanel } from './FilterPanel'
 import { MenuGrid } from './MenuGrid'
 import { SearchBar } from './SearchBar'
 
@@ -11,6 +24,10 @@ export function MenuSection() {
   const [activeCategory, setActiveCategory] =
     useState<MenuCategory>('entrantes')
   const [searchQuery, setSearchQuery] = useState('')
+  const [dietaryTags, setDietaryTags] = useState<DietaryTag[]>([])
+  const [spicyOnly, setSpicyOnly] = useState(false)
+  const [priceRange, setPriceRange] = useState<PriceRange>('all')
+  const [excludedAllergens, setExcludedAllergens] = useState<Allergen[]>([])
   const [selectedItem, setSelectedItem] = useState<MenuItem | null>(null)
   const detailTriggerRef = useRef<HTMLButtonElement | null>(null)
 
@@ -20,16 +37,119 @@ export function MenuSection() {
       return false
     }
 
-    if (!normalizedQuery) {
-      return true
+    if (normalizedQuery) {
+      const searchableText = normalizeSearchText(
+        [item.name, item.description, ...item.ingredients].join(' '),
+      )
+
+      if (!searchableText.includes(normalizedQuery)) {
+        return false
+      }
     }
 
-    const searchableText = normalizeSearchText(
-      [item.name, item.description, ...item.ingredients].join(' '),
-    )
+    if (!dietaryTags.every((tag) => item.dietaryTags.includes(tag))) {
+      return false
+    }
 
-    return searchableText.includes(normalizedQuery)
+    if (spicyOnly && item.spicyLevel === 0) {
+      return false
+    }
+
+    if (priceRange === 'under-7' && item.price >= 7) {
+      return false
+    }
+
+    if (priceRange === '7-to-15' && (item.price < 7 || item.price > 15)) {
+      return false
+    }
+
+    if (priceRange === 'over-15' && item.price <= 15) {
+      return false
+    }
+
+    if (
+      excludedAllergens.some((allergen) => item.allergens.includes(allergen))
+    ) {
+      return false
+    }
+
+    return true
   })
+
+  const toggleDietaryTag = (tag: DietaryTag) => {
+    setDietaryTags((current) =>
+      current.includes(tag)
+        ? current.filter((item) => item !== tag)
+        : [...current, tag],
+    )
+  }
+
+  const toggleAllergen = (allergen: Allergen) => {
+    setExcludedAllergens((current) =>
+      current.includes(allergen)
+        ? current.filter((item) => item !== allergen)
+        : [...current, allergen],
+    )
+  }
+
+  const clearFilters = () => {
+    setDietaryTags([])
+    setSpicyOnly(false)
+    setPriceRange('all')
+    setExcludedAllergens([])
+  }
+
+  const clearCurrentRefinement = () => {
+    clearFilters()
+    setSearchQuery('')
+  }
+
+  const hasActiveFilters =
+    dietaryTags.length > 0 ||
+    spicyOnly ||
+    priceRange !== 'all' ||
+    excludedAllergens.length > 0
+
+  const priceLabels: Record<Exclude<PriceRange, 'all'>, string> = {
+    'under-7': 'Menos de 7 €',
+    '7-to-15': 'De 7 € a 15 €',
+    'over-15': 'Más de 15 €',
+  }
+
+  const activeFilters: ActiveFilter[] = [
+    ...dietaryTags.map((tag) => ({
+      id: `dietary-${tag}`,
+      label:
+        dietaryTagOptions.find((option) => option.id === tag)?.label ?? tag,
+      onRemove: () => toggleDietaryTag(tag),
+    })),
+    ...(spicyOnly
+      ? [
+          {
+            id: 'spicy',
+            label: 'Picante',
+            onRemove: () => setSpicyOnly(false),
+          },
+        ]
+      : []),
+    ...(priceRange !== 'all'
+      ? [
+          {
+            id: 'price',
+            label: priceLabels[priceRange],
+            onRemove: () => setPriceRange('all'),
+          },
+        ]
+      : []),
+    ...excludedAllergens.map((allergen) => ({
+      id: `allergen-${allergen}`,
+      label: `Sin ${
+        allergenOptions.find((option) => option.id === allergen)?.label ??
+        allergen
+      }`,
+      onRemove: () => toggleAllergen(allergen),
+    })),
+  ]
 
   const openDetails = (item: MenuItem, trigger: HTMLButtonElement) => {
     detailTriggerRef.current = trigger
@@ -99,6 +219,18 @@ export function MenuSection() {
           </div>
         </div>
 
+        <FilterPanel
+          dietaryTags={dietaryTags}
+          spicyOnly={spicyOnly}
+          priceRange={priceRange}
+          excludedAllergens={excludedAllergens}
+          onToggleDietaryTag={toggleDietaryTag}
+          onToggleSpicy={() => setSpicyOnly((current) => !current)}
+          onPriceRangeChange={setPriceRange}
+          onToggleAllergen={toggleAllergen}
+        />
+        <ActiveFilters filters={activeFilters} onClearAll={clearFilters} />
+
         <div
           id="menu-category-panel"
           className="mt-8"
@@ -117,8 +249,27 @@ export function MenuSection() {
             <MenuGrid items={visibleItems} onViewDetails={openDetails} />
           ) : (
             <EmptyState
-              query={searchQuery}
-              onReset={() => setSearchQuery('')}
+              description={
+                hasActiveFilters && searchQuery
+                  ? 'No hay platos que cumplan la búsqueda y los filtros dentro de la categoría seleccionada.'
+                  : hasActiveFilters
+                  ? 'No hay platos que cumplan esta combinación dentro de la categoría seleccionada.'
+                  : `No hay platos que coincidan con “${searchQuery}” dentro de esta categoría.`
+              }
+              actionLabel={
+                hasActiveFilters && searchQuery
+                  ? 'Limpiar búsqueda y filtros'
+                  : hasActiveFilters
+                    ? 'Limpiar filtros'
+                    : 'Limpiar búsqueda'
+              }
+              onReset={
+                hasActiveFilters && searchQuery
+                  ? clearCurrentRefinement
+                  : hasActiveFilters
+                    ? clearFilters
+                    : () => setSearchQuery('')
+              }
             />
           )}
         </div>
