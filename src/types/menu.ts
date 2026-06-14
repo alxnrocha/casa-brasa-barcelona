@@ -26,6 +26,8 @@ export type SpicyLevel = 0 | 1 | 2 | 3
 
 export type PriceRange = 'all' | 'under-7' | '7-to-15' | 'over-15'
 
+export type MenuSort = 'featured' | 'price-asc' | 'price-desc'
+
 export type MenuItem = {
   id: string
   slug: string

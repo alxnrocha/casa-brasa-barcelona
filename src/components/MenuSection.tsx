@@ -10,6 +10,7 @@ import type {
   DietaryTag,
   MenuCategory,
   MenuItem,
+  MenuSort,
   PriceRange,
 } from '../types/menu'
 import { normalizeSearchText } from '../utils/search'
@@ -18,6 +19,7 @@ import { DishModal } from './DishModal'
 import { EmptyState } from './EmptyState'
 import { FilterPanel } from './FilterPanel'
 import { MenuGrid } from './MenuGrid'
+import { MenuSortControl } from './MenuSortControl'
 import { SearchBar } from './SearchBar'
 
 export function MenuSection() {
@@ -28,11 +30,12 @@ export function MenuSection() {
   const [spicyOnly, setSpicyOnly] = useState(false)
   const [priceRange, setPriceRange] = useState<PriceRange>('all')
   const [excludedAllergens, setExcludedAllergens] = useState<Allergen[]>([])
+  const [sortOrder, setSortOrder] = useState<MenuSort>('featured')
   const [selectedItem, setSelectedItem] = useState<MenuItem | null>(null)
   const detailTriggerRef = useRef<HTMLButtonElement | null>(null)
 
   const normalizedQuery = normalizeSearchText(searchQuery)
-  const visibleItems = menuItems.filter((item) => {
+  const filteredItems = menuItems.filter((item) => {
     if (item.category !== activeCategory) {
       return false
     }
@@ -75,6 +78,22 @@ export function MenuSection() {
 
     return true
   })
+  const visibleItems = filteredItems
+    .map((item, index) => ({ item, index }))
+    .sort((a, b) => {
+      if (sortOrder === 'price-asc') {
+        return a.item.price - b.item.price || a.index - b.index
+      }
+
+      if (sortOrder === 'price-desc') {
+        return b.item.price - a.item.price || a.index - b.index
+      }
+
+      return (
+        Number(b.item.featured) - Number(a.item.featured) || a.index - b.index
+      )
+    })
+    .map(({ item }) => item)
 
   const toggleDietaryTag = (tag: DietaryTag) => {
     setDietaryTags((current) =>
@@ -236,14 +255,20 @@ export function MenuSection() {
           className="mt-8"
           aria-live="polite"
         >
-          <div className="mb-4 flex items-center justify-between gap-4">
-            <p className="text-sm text-charcoal/58">
-              {visibleItems.length}{' '}
-              {visibleItems.length === 1 ? 'resultado' : 'resultados'}
-            </p>
-            <p className="hidden text-xs text-charcoal/45 sm:block">
-              Precios con IVA incluido
-            </p>
+          <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+            <div className="flex items-center justify-between gap-4">
+              <p className="text-sm text-charcoal/58">
+                {visibleItems.length}{' '}
+                {visibleItems.length === 1 ? 'resultado' : 'resultados'}
+              </p>
+              <p className="text-xs text-charcoal/45">
+                <span className="sm:hidden">IVA incluido</span>
+                <span className="hidden sm:inline">
+                  Precios con IVA incluido
+                </span>
+              </p>
+            </div>
+            <MenuSortControl value={sortOrder} onChange={setSortOrder} />
           </div>
           {visibleItems.length > 0 ? (
             <MenuGrid items={visibleItems} onViewDetails={openDetails} />
