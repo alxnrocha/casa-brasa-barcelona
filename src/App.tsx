@@ -66,11 +66,17 @@ export function App() {
 
   return (
     <div className="min-h-screen bg-cream text-charcoal">
+      <a
+        href="#inicio"
+        className="fixed left-4 top-4 z-50 -translate-y-24 rounded-lg bg-charcoal px-4 py-3 text-sm font-semibold text-white shadow-lg transition-transform focus:translate-y-0 focus:outline-2 focus:outline-offset-3 focus:outline-wine"
+      >
+        Saltar al contenido principal
+      </a>
       <Header
         selectionCount={selectionCount}
         onOpenSelection={openSelection}
       />
-      <main id="inicio">
+      <main id="inicio" tabIndex={-1}>
         <Hero />
         <MenuSection onAddToSelection={addToSelection} />
         <RestaurantInfo />

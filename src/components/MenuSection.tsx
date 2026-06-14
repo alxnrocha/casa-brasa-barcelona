@@ -257,11 +257,15 @@ export function MenuSection({ onAddToSelection }: MenuSectionProps) {
         <div
           id="menu-category-panel"
           className="mt-8"
-          aria-live="polite"
         >
           <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <div className="flex items-center justify-between gap-4">
-              <p className="text-sm text-charcoal/58">
+              <p
+                className="text-sm text-charcoal/58"
+                role="status"
+                aria-live="polite"
+                aria-atomic="true"
+              >
                 {visibleItems.length}{' '}
                 {visibleItems.length === 1 ? 'resultado' : 'resultados'}
               </p>
