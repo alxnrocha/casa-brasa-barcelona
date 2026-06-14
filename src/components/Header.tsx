@@ -11,9 +11,13 @@ const navigationItems = [
 
 type HeaderProps = {
   selectionCount: number
+  onOpenSelection: (trigger: HTMLButtonElement) => void
 }
 
-export function Header({ selectionCount }: HeaderProps) {
+export function Header({
+  selectionCount,
+  onOpenSelection,
+}: HeaderProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   useEffect(() => {
@@ -75,12 +79,11 @@ export function Header({ selectionCount }: HeaderProps) {
 
           <button
             type="button"
-            className="flex min-h-12 items-center gap-3 rounded-md bg-wine px-5 text-sm font-semibold text-white shadow-[0_10px_24px_rgba(114,47,55,0.18)] transition-colors hover:bg-wine/92 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-wine disabled:cursor-not-allowed"
+            className="flex min-h-12 cursor-pointer items-center gap-3 rounded-md bg-wine px-5 text-sm font-semibold text-white shadow-[0_10px_24px_rgba(114,47,55,0.18)] transition-colors hover:bg-wine/92 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-wine"
             aria-label={`Selección, ${selectionCount} ${
               selectionCount === 1 ? 'plato' : 'platos'
-            }. Panel disponible próximamente`}
-            title="El panel de selección estará disponible en la próxima etapa"
-            disabled
+            }`}
+            onClick={(event) => onOpenSelection(event.currentTarget)}
           >
             Ver selección
             <span className="relative" aria-hidden="true">
@@ -139,12 +142,13 @@ export function Header({ selectionCount }: HeaderProps) {
         </ul>
         <button
           type="button"
-          className="my-5 flex min-h-12 w-full items-center justify-center gap-3 rounded-md bg-wine px-5 text-sm font-semibold text-white disabled:cursor-not-allowed"
+          className="my-5 flex min-h-12 w-full cursor-pointer items-center justify-center gap-3 rounded-md bg-wine px-5 text-sm font-semibold text-white transition-colors hover:bg-wine/92 focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-wine"
           aria-label={`Selección, ${selectionCount} ${
             selectionCount === 1 ? 'plato' : 'platos'
-          }. Panel disponible próximamente`}
-          title="El panel de selección estará disponible en la próxima etapa"
-          disabled
+          }`}
+          onClick={(event) => {
+            onOpenSelection(event.currentTarget)
+          }}
         >
           Ver selección
           <ShoppingBasket aria-hidden="true" size={19} strokeWidth={1.8} />
