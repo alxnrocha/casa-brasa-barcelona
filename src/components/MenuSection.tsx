@@ -22,7 +22,11 @@ import { MenuGrid } from './MenuGrid'
 import { MenuSortControl } from './MenuSortControl'
 import { SearchBar } from './SearchBar'
 
-export function MenuSection() {
+type MenuSectionProps = {
+  onAddToSelection: (item: MenuItem, quantity: number) => void
+}
+
+export function MenuSection({ onAddToSelection }: MenuSectionProps) {
   const [activeCategory, setActiveCategory] =
     useState<MenuCategory>('entrantes')
   const [searchQuery, setSearchQuery] = useState('')
@@ -299,7 +303,12 @@ export function MenuSection() {
           )}
         </div>
       </div>
-      <DishModal item={selectedItem} onClose={closeDetails} />
+      <DishModal
+        key={selectedItem?.id ?? 'closed'}
+        item={selectedItem}
+        onAddToSelection={onAddToSelection}
+        onClose={closeDetails}
+      />
     </section>
   )
 }

@@ -1,7 +1,11 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import {
+  Check,
   Flame,
   Leaf,
+  Minus,
+  Plus,
+  ShoppingBasket,
   WheatOff,
   X,
 } from 'lucide-react'
@@ -15,6 +19,7 @@ import type { MenuItem } from '../types/menu'
 
 type DishModalProps = {
   item: MenuItem | null
+  onAddToSelection: (item: MenuItem, quantity: number) => void
   onClose: () => void
 }
 
@@ -25,9 +30,15 @@ const priceFormatter = new Intl.NumberFormat('es-ES', {
 
 const spicyLabels = ['Sin picante', 'Suave', 'Picante', 'Muy picante'] as const
 
-export function DishModal({ item, onClose }: DishModalProps) {
+export function DishModal({
+  item,
+  onAddToSelection,
+  onClose,
+}: DishModalProps) {
   const dialogRef = useRef<HTMLDialogElement>(null)
   const closeButtonRef = useRef<HTMLButtonElement>(null)
+  const [quantity, setQuantity] = useState(1)
+  const [hasAdded, setHasAdded] = useState(false)
 
   useEffect(() => {
     const dialog = dialogRef.current
@@ -79,6 +90,11 @@ export function DishModal({ item, onClose }: DishModalProps) {
     (allergen) =>
       allergenOptions.find(({ id }) => id === allergen)?.label ?? allergen,
   )
+
+  const addItem = () => {
+    onAddToSelection(item, quantity)
+    setHasAdded(true)
+  }
 
   return (
     <dialog
@@ -192,7 +208,83 @@ export function DishModal({ item, onClose }: DishModalProps) {
             </ul>
           </div>
 
-          <p className="mt-8 rounded-xl border border-wine/10 bg-wine/5 px-4 py-3 text-xs leading-5 text-charcoal/58">
+          <div className="mt-8 border-t border-charcoal/12 pt-7">
+            <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+              <div>
+                <p
+                  id="dish-quantity-label"
+                  className="text-xs font-bold uppercase tracking-[0.16em] text-charcoal/48"
+                >
+                  Cantidad
+                </p>
+                <div
+                  className="mt-3 inline-flex items-center rounded-xl border border-charcoal/12 bg-white"
+                  role="group"
+                  aria-labelledby="dish-quantity-label"
+                >
+                  <button
+                    type="button"
+                    className="flex size-11 cursor-pointer items-center justify-center rounded-l-xl text-charcoal/65 transition-colors hover:bg-wine/6 hover:text-wine focus-visible:z-10 focus-visible:outline-2 focus-visible:outline-wine disabled:cursor-not-allowed disabled:opacity-35"
+                    aria-label="Reducir cantidad"
+                    disabled={quantity === 1}
+                    onClick={() => {
+                      setQuantity((current) => Math.max(1, current - 1))
+                      setHasAdded(false)
+                    }}
+                  >
+                    <Minus aria-hidden="true" size={17} strokeWidth={1.8} />
+                  </button>
+                  <output
+                    className="flex min-w-12 items-center justify-center border-x border-charcoal/10 px-3 text-sm font-bold"
+                    aria-live="polite"
+                  >
+                    {quantity}
+                  </output>
+                  <button
+                    type="button"
+                    className="flex size-11 cursor-pointer items-center justify-center rounded-r-xl text-charcoal/65 transition-colors hover:bg-wine/6 hover:text-wine focus-visible:z-10 focus-visible:outline-2 focus-visible:outline-wine disabled:cursor-not-allowed disabled:opacity-35"
+                    aria-label="Aumentar cantidad"
+                    disabled={quantity === 10}
+                    onClick={() => {
+                      setQuantity((current) => Math.min(10, current + 1))
+                      setHasAdded(false)
+                    }}
+                  >
+                    <Plus aria-hidden="true" size={17} strokeWidth={1.8} />
+                  </button>
+                </div>
+              </div>
+
+              <button
+                type="button"
+                className="inline-flex min-h-12 cursor-pointer items-center justify-center gap-2.5 rounded-xl bg-wine px-5 text-sm font-semibold text-white shadow-[0_10px_24px_rgba(114,47,55,0.16)] transition-colors hover:bg-wine/92 focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-wine disabled:cursor-default disabled:bg-olive"
+                disabled={hasAdded}
+                onClick={addItem}
+              >
+                {hasAdded ? (
+                  <Check aria-hidden="true" size={18} strokeWidth={2} />
+                ) : (
+                  <ShoppingBasket
+                    aria-hidden="true"
+                    size={18}
+                    strokeWidth={1.8}
+                  />
+                )}
+                {hasAdded
+                  ? 'Añadido a la selección'
+                  : quantity === 1
+                    ? 'Añadir a la selección'
+                    : `Añadir ${quantity} a la selección`}
+              </button>
+            </div>
+            <p className="mt-3 text-xs leading-5 text-charcoal/52" aria-live="polite">
+              {hasAdded
+                ? 'Selección actualizada. Máximo 10 unidades por plato.'
+                : 'Selección local de demostración. No se realiza ningún pedido.'}
+            </p>
+          </div>
+
+          <p className="mt-7 rounded-xl border border-wine/10 bg-wine/5 px-4 py-3 text-xs leading-5 text-charcoal/58">
             Información orientativa para este proyecto de demostración.
             Consulta al personal en caso de alergias o intolerancias.
           </p>
