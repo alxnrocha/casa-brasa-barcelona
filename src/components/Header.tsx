@@ -9,7 +9,11 @@ const navigationItems = [
   { href: '#contacto', label: 'Contacto' },
 ]
 
-export function Header() {
+type HeaderProps = {
+  selectionCount: number
+}
+
+export function Header({ selectionCount }: HeaderProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   useEffect(() => {
@@ -72,15 +76,17 @@ export function Header() {
           <button
             type="button"
             className="flex min-h-12 items-center gap-3 rounded-md bg-wine px-5 text-sm font-semibold text-white shadow-[0_10px_24px_rgba(114,47,55,0.18)] transition-colors hover:bg-wine/92 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-wine disabled:cursor-not-allowed"
-            aria-label="Selección, 0 platos. Disponible próximamente"
-            title="La selección estará disponible próximamente"
+            aria-label={`Selección, ${selectionCount} ${
+              selectionCount === 1 ? 'plato' : 'platos'
+            }. Panel disponible próximamente`}
+            title="El panel de selección estará disponible en la próxima etapa"
             disabled
           >
             Ver selección
             <span className="relative" aria-hidden="true">
               <ShoppingBasket size={19} strokeWidth={1.8} />
-              <span className="absolute -right-2.5 -top-2.5 flex size-4 items-center justify-center rounded-full bg-cream text-[0.62rem] font-bold text-wine">
-                0
+              <span className="absolute -right-3 -top-2.5 flex min-h-4 min-w-4 items-center justify-center rounded-full bg-cream px-1 text-[0.62rem] font-bold text-wine">
+                {selectionCount}
               </span>
             </span>
           </button>
@@ -134,13 +140,15 @@ export function Header() {
         <button
           type="button"
           className="my-5 flex min-h-12 w-full items-center justify-center gap-3 rounded-md bg-wine px-5 text-sm font-semibold text-white disabled:cursor-not-allowed"
-          aria-label="Selección, 0 platos. Disponible próximamente"
-          title="La selección estará disponible próximamente"
+          aria-label={`Selección, ${selectionCount} ${
+            selectionCount === 1 ? 'plato' : 'platos'
+          }. Panel disponible próximamente`}
+          title="El panel de selección estará disponible en la próxima etapa"
           disabled
         >
           Ver selección
           <ShoppingBasket aria-hidden="true" size={19} strokeWidth={1.8} />
-          <span aria-hidden="true">0</span>
+          <span aria-hidden="true">{selectionCount}</span>
         </button>
       </div>
     </header>

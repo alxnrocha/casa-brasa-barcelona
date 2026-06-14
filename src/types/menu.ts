@@ -43,6 +43,11 @@ export type MenuItem = {
   featured: boolean
 }
 
+export type SelectionItem = {
+  item: MenuItem
+  quantity: number
+}
+
 export type MenuCategoryOption = {
   id: MenuCategory
   label: string
