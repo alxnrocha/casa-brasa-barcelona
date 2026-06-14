@@ -30,6 +30,10 @@ export function SelectionDrawer({
       total + selectionItem.item.price * selectionItem.quantity,
     0,
   )
+  const totalQuantity = selection.reduce(
+    (total, selectionItem) => total + selectionItem.quantity,
+    0,
+  )
 
   useEffect(() => {
     const dialog = dialogRef.current
@@ -87,7 +91,7 @@ export function SelectionDrawer({
       }}
     >
       <div className="flex h-full flex-col">
-        <header className="flex items-start justify-between gap-4 border-b border-charcoal/12 px-6 py-6 sm:px-8">
+        <div className="flex items-start justify-between gap-4 border-b border-charcoal/12 px-6 py-6 sm:px-8">
           <div>
             <p className="text-[0.68rem] font-bold uppercase tracking-[0.18em] text-wine">
               Pedido presencial
@@ -105,9 +109,23 @@ export function SelectionDrawer({
           >
             <X aria-hidden="true" size={21} strokeWidth={1.8} />
           </button>
-        </header>
+        </div>
 
         <div className="min-h-0 flex-1 overflow-y-auto px-6 py-6 sm:px-8">
+          <p
+            className="sr-only"
+            role="status"
+            aria-live="polite"
+            aria-atomic="true"
+          >
+            {totalQuantity === 0
+              ? 'La selección está vacía.'
+              : `${totalQuantity} ${
+                  totalQuantity === 1
+                    ? 'unidad seleccionada'
+                    : 'unidades seleccionadas'
+                }. Subtotal estimado: ${priceFormatter.format(subtotal)}.`}
+          </p>
           {selection.length > 0 ? (
             <ul>
               {selection.map((selectionItem) => (
@@ -153,7 +171,7 @@ export function SelectionDrawer({
         </div>
 
         {selection.length > 0 && (
-          <footer className="border-t border-charcoal/12 bg-white/70 px-6 py-5 backdrop-blur sm:px-8 sm:py-6">
+          <div className="border-t border-charcoal/12 bg-white/70 px-6 py-5 backdrop-blur sm:px-8 sm:py-6">
             <div className="flex items-center justify-between gap-4">
               <span className="text-sm font-semibold text-charcoal/62">
                 Subtotal estimado
@@ -174,7 +192,7 @@ export function SelectionDrawer({
                 demostrativa y se pierde al recargar la página.
               </p>
             </div>
-          </footer>
+          </div>
         )}
       </div>
     </dialog>
