@@ -74,6 +74,7 @@ horizontal.
 |-- README.md
 |-- index.html
 |-- public/
+|-- screenshots/
 `-- src/
     |-- assets/
     |   |-- brand/
@@ -111,6 +112,16 @@ npm run build
 npm run preview
 ```
 
+## Capturas
+
+### Escritorio
+
+![Vista completa de Casa Brasa Barcelona en escritorio](./screenshots/desktop.png)
+
+### Móvil
+
+![Vista completa de Casa Brasa Barcelona en móvil](./screenshots/mobile.png)
+
 ## Documentación
 
 - [Blueprint](./BLUEPRINT.md): alcance, interfaz y planificación.
@@ -119,8 +130,9 @@ npm run preview
 
 ## Estado
 
-La experiencia funcional está terminada y validada. Las capturas finales y el
-enlace de despliegue se incorporarán en las siguientes etapas de publicación.
+La experiencia funcional está terminada y validada. Las capturas finales están
+incorporadas y el enlace de despliegue se añadirá en la siguiente etapa de
+publicación.
 
 ## Aviso
 
