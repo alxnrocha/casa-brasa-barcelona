@@ -130,9 +130,14 @@ npm run preview
 
 ## Estado
 
-La experiencia funcional está terminada y validada. Las capturas finales están
-incorporadas y el enlace de despliegue se añadirá en la siguiente etapa de
-publicación.
+La experiencia funcional está terminada, validada y preparada para su
+publicación automática mediante GitHub Pages.
+
+## Deploy
+
+Proyecto publicado con GitHub Pages:
+
+[https://alxnrocha.github.io/casa-brasa-barcelona/](https://alxnrocha.github.io/casa-brasa-barcelona/)
 
 ## Aviso
 

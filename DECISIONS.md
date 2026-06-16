@@ -215,8 +215,8 @@ Una versión para un restaurante real podría incorporar:
 
 ## 15. Estado actual
 
-La experiencia funcional, responsive y accesible está terminada. La fase
-restante corresponde a capturas, despliegue y revisión final de presentación.
+La experiencia funcional, responsive y accesible está terminada. El proyecto
+incluye capturas finales y despliegue automatizado mediante GitHub Pages.
 
 ## Fuentes de imágenes
 
