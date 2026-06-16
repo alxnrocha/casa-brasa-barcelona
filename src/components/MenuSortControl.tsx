@@ -18,7 +18,7 @@ export function MenuSortControl({
 }: MenuSortControlProps) {
   return (
     <label className="flex w-full items-center gap-2 sm:w-auto">
-      <span className="flex shrink-0 items-center gap-1.5 text-xs font-semibold text-charcoal/48">
+      <span className="flex shrink-0 items-center gap-1.5 text-xs font-semibold text-charcoal/64">
         <ArrowUpDown aria-hidden="true" size={14} strokeWidth={1.8} />
         Ordenar por
       </span>

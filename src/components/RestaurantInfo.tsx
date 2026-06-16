@@ -56,24 +56,18 @@ const contactDetails = [
     icon: Mail,
     label: 'Correo',
     content: (
-      <a
-        className="rounded-sm underline decoration-wine/25 underline-offset-4 transition-colors hover:text-wine focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-wine"
-        href="mailto:reservas-demo@casabrasa.es"
-      >
+      <span>
         reservas-demo@casabrasa.es
-      </a>
+      </span>
     ),
   },
   {
     icon: Phone,
     label: 'Teléfono',
     content: (
-      <a
-        className="rounded-sm underline decoration-wine/25 underline-offset-4 transition-colors hover:text-wine focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-wine"
-        href="tel:+34000000000"
-      >
+      <span>
         +34 000 000 000
-      </a>
+      </span>
     ),
   },
 ] as const
@@ -154,7 +148,7 @@ export function RestaurantInfo() {
                     <Icon aria-hidden="true" size={17} strokeWidth={1.8} />
                   </span>
                   <div>
-                    <p className="text-[0.65rem] font-bold uppercase tracking-[0.15em] text-charcoal/45">
+                    <p className="text-[0.65rem] font-bold uppercase tracking-[0.15em] text-charcoal/64">
                       {label}
                     </p>
                     <div className="mt-1 text-sm leading-5 text-charcoal/72">
@@ -198,7 +192,7 @@ export function RestaurantInfo() {
             </div>
           </div>
 
-          <p className="mt-6 rounded-full border border-charcoal/8 bg-cream/55 px-4 py-2 text-center text-xs text-charcoal/52">
+          <p className="mt-6 rounded-full border border-charcoal/8 bg-cream/55 px-4 py-2 text-center text-xs text-charcoal/68">
             Datos de contacto ficticios para demostración.
           </p>
         </article>
