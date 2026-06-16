@@ -73,7 +73,7 @@ export function Footer() {
           </div>
 
           <nav aria-label="Navegación del pie de página">
-            <p className="text-xs font-bold uppercase tracking-[0.18em] text-white/48">
+            <p className="text-xs font-bold uppercase tracking-[0.18em] text-white/72">
               Navegación
             </p>
             <ul className="mt-4 space-y-2.5">
@@ -91,7 +91,7 @@ export function Footer() {
           </nav>
 
           <div>
-            <p className="text-xs font-bold uppercase tracking-[0.18em] text-white/48">
+            <p className="text-xs font-bold uppercase tracking-[0.18em] text-white/72">
               Proyecto de portfolio
             </p>
             <p className="mt-4 max-w-sm text-sm leading-6 text-white/78">
@@ -118,7 +118,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="flex flex-col gap-3 pt-6 text-xs leading-5 text-white/52 sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex flex-col gap-3 pt-6 text-xs leading-5 text-white/72 sm:flex-row sm:items-center sm:justify-between">
           <p>
             © {new Date().getFullYear()} Casa Brasa Barcelona. Proyecto
             demostrativo.

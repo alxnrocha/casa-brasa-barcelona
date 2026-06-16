@@ -261,7 +261,7 @@ export function MenuSection({ onAddToSelection }: MenuSectionProps) {
           <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <div className="flex items-center justify-between gap-4">
               <p
-                className="text-sm text-charcoal/58"
+                className="text-sm text-charcoal/68"
                 role="status"
                 aria-live="polite"
                 aria-atomic="true"
@@ -269,7 +269,7 @@ export function MenuSection({ onAddToSelection }: MenuSectionProps) {
                 {visibleItems.length}{' '}
                 {visibleItems.length === 1 ? 'resultado' : 'resultados'}
               </p>
-              <p className="text-xs text-charcoal/45">
+              <p className="text-xs text-charcoal/64">
                 <span className="sm:hidden">IVA incluido</span>
                 <span className="hidden sm:inline">
                   Precios con IVA incluido
