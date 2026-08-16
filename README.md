@@ -40,8 +40,7 @@
 │   ├── utils/                     # Utilidades de filtrado y formateo monetario
 │   ├── App.tsx                    # Shell principal de la aplicación
 │   └── index.css                  # Estilos globales y tokens Tailwind
-├── BLUEPRINT.md                   # Planificación técnica
-└── DECISIONS.md                   # Registro de decisiones de arquitectura
+└── package.json                   # Scripts y dependencias
 ```
 
 ---
