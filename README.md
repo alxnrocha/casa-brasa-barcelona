@@ -29,9 +29,6 @@
 ```text
 03-casa-brasa-barcelona/
 ├── index.html                     # Entrypoint HTML5
-├── screenshots/                   # Capturas de pantalla reales
-│   ├── desktop.png
-│   └── mobile.png
 ├── src/
 │   ├── assets/                    # Identidad de marca e imágenes de platos
 │   ├── components/                # Modales, filtros, cards de menú y comanda
