@@ -1,150 +1,93 @@
-# Casa Brasa Barcelona
+# Casa Brasa Barcelona — Carta Digital & Menú Gastronómico
 
-Carta digital responsive para un restaurante ficticio de cocina mediterránea
-contemporánea en Barcelona.
+[![Demo GitHub Pages](https://img.shields.io/badge/Demo-GitHub_Pages-22c55e?style=for-the-badge&logo=github&logoColor=white)](https://alxnrocha.github.io/casa-brasa-barcelona/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.8-blue.svg)](https://www.typescriptlang.org/)
+[![React](https://img.shields.io/badge/React-19.2-61dafb.svg)](https://react.dev/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-v4.0-38bdf8.svg)](https://tailwindcss.com/)
+[![License](https://img.shields.io/badge/License-MIT-green.svg)](./LICENSE)
 
-El proyecto simula la experiencia de consultar una carta desde el móvil o un
-código QR: permite explorar platos, buscar ingredientes, combinar filtros,
-consultar información alimentaria y preparar una selección local antes de
-realizar un pedido presencial.
+**Casa Brasa Barcelona** es una aplicación web tipo carta digital interactiva para un restaurante de cocina mediterránea contemporánea en Barcelona. Diseñada con enfoque *mobile-first* para consulta mediante código QR, permite explorar platos, filtrar por alérgenos y dietas, calcular subtotales y gestionar pedidos locales.
 
-## Funcionalidades
+- 🌐 **Demo en Vivo (GitHub Pages):** [https://alxnrocha.github.io/casa-brasa-barcelona/](https://alxnrocha.github.io/casa-brasa-barcelona/)
+- 📦 **Repositorio GitHub:** [https://github.com/alxnrocha/casa-brasa-barcelona](https://github.com/alxnrocha/casa-brasa-barcelona)
 
-- navegación responsive con menú móvil;
-- catálogo local de veinte platos dividido en cinco categorías;
-- búsqueda por nombre, descripción e ingredientes sin diferenciar acentos;
-- filtros combinables por dieta, picante, precio y alérgenos;
-- filtros activos con eliminación individual y limpieza conjunta;
-- ordenación por destacados y precio;
-- detalle accesible de cada plato con ingredientes y alérgenos;
-- control de cantidad entre 1 y 10 unidades;
-- selección local con edición, eliminación y subtotal estimado;
-- estados vacíos y mensajes dinámicos accesibles;
-- información ficticia del restaurante y footer de portfolio;
-- diseño adaptado a móvil, tablet y escritorio.
+---
 
-## Tecnologías
+## 📸 Vistas Reales del Sistema
 
-- React 19;
-- TypeScript;
-- Vite;
-- Tailwind CSS;
-- Lucide React;
-- Git y GitHub.
+### 1. Vista Principal (Desktop)
 
-La aplicación utiliza datos locales tipados y estado de React distribuido
-mediante props. No requiere backend, base de datos ni biblioteca de estado
-global.
+![Vista desktop de Casa Brasa Barcelona](./screenshots/desktop.png)
 
-## Calidad técnica
+### 2. Experiencia Responsive (Móvil)
 
-### Accesibilidad
+![Vista mobile de Casa Brasa Barcelona](./screenshots/mobile.png)
 
-- estructura semántica y enlace para saltar al contenido principal;
-- navegación completa mediante teclado;
-- foco visible y restauración del foco al cerrar diálogos;
-- modales nativos con cierre por botón, fondo y tecla `Escape`;
-- nombres accesibles y estados perceptibles en controles;
-- anuncios concisos para resultados, cantidades y subtotal;
-- soporte para `prefers-reduced-motion`;
-- textos alternativos y contenido decorativo correctamente diferenciados.
+---
 
-### Responsive
+## ✨ Características Principales
 
-La interfaz sigue un enfoque mobile first. Los controles, grids, modales y el
-panel de selección se adaptan desde 320 px hasta escritorio sin desbordamiento
-horizontal.
+### 🚀 Experiencia de Usuario & Frontend
+- **Catálogo Gastronómico Interactivo:** 20 platos divididos en 5 categorías con información detallada de ingredientes y alérgenos.
+- **Búsqueda y Filtros Combinados:** Búsqueda normalizada por texto sin distinción de acentos y filtros multicriterio (vegetariano, sin gluten, picante, rango de precio).
+- **Gestión de Comanda y Subtotal Local:** Control de cantidades (1 a 10 unidades), cálculo automático de precios en Euros y panel lateral de selección.
+- **Modales Accesibles (WCAG):** Diálogos de detalle de plato accesibles por teclado con control de foco y cierre mediante tecla `Escape`.
+- **Diseño Mobile-First & Dark Elegance:** Paleta de colores cálida inspirada en brasa y gastronomía con tipografía moderna y micro-animaciones fluidas.
 
-### Datos y estado
+---
 
-- catálogo serializable definido en TypeScript;
-- imágenes asociadas fuera del modelo de datos;
-- búsqueda normalizada mediante una utilidad independiente;
-- filtros y ordenación derivados del estado actual;
-- selección limitada a diez unidades por plato;
-- subtotal calculado localmente;
-- datos de selección no persistentes.
-
-## Estructura
+## 🏛️ Estructura del Proyecto
 
 ```text
-.
-|-- BLUEPRINT.md
-|-- DECISIONS.md
-|-- README.md
-|-- index.html
-|-- public/
-|-- screenshots/
-`-- src/
-    |-- assets/
-    |   |-- brand/
-    |   `-- images/
-    |       `-- menu/
-    |-- components/
-    |-- data/
-    |-- types/
-    |-- utils/
-    |-- App.tsx
-    |-- index.css
-    `-- main.tsx
+03-casa-brasa-barcelona/
+├── index.html                     # Entrypoint HTML5
+├── screenshots/                   # Capturas de pantalla reales
+│   ├── desktop.png
+│   └── mobile.png
+├── src/
+│   ├── assets/                    # Identidad de marca e imágenes de platos
+│   ├── components/                # Modales, filtros, cards de menú y comanda
+│   ├── data/                      # Catálogo tipado de productos y alérgenos
+│   ├── types/                     # Interfaces y tipos TypeScript
+│   ├── utils/                     # Utilidades de filtrado y formateo monetario
+│   ├── App.tsx                    # Shell principal de la aplicación
+│   └── index.css                  # Estilos globales y tokens Tailwind
+├── BLUEPRINT.md                   # Planificación técnica
+└── DECISIONS.md                   # Registro de decisiones de arquitectura
 ```
 
-## Ejecución local
+---
 
-Requisitos:
+## ⚡ Guía de Inicio Rápido
 
-- Node.js 24 o una versión LTS compatible;
-- npm.
-
+### 1. Clonar e Instalar Dependencias
 ```bash
 git clone https://github.com/alxnrocha/casa-brasa-barcelona.git
 cd casa-brasa-barcelona
 npm install
-npm run dev
 ```
 
-## Comandos
-
+### 2. Iniciar en Modo Desarrollo
 ```bash
 npm run dev
-npm run lint
-npm run build
-npm run preview
 ```
 
-## Capturas
+---
 
-### Escritorio
+## 🧪 Calidad de Código y Pruebas
 
-![Vista completa de Casa Brasa Barcelona en escritorio](./screenshots/desktop.png)
+```bash
+# Análisis estático de código
+npm run lint
 
-### Móvil
+# Compilar para producción
+npm run build
+```
 
-![Vista completa de Casa Brasa Barcelona en móvil](./screenshots/mobile.png)
+---
 
-## Documentación
+## 📄 Licencia
 
-- [Blueprint](./BLUEPRINT.md): alcance, interfaz y planificación.
-- [Decisiones técnicas](./DECISIONS.md): arquitectura, estado, datos,
-  accesibilidad y criterios de implementación.
+Este proyecto está bajo la Licencia MIT. Consulte el archivo [LICENSE](./LICENSE) para más detalles.
 
-## Estado
-
-La experiencia funcional está terminada, validada y preparada para su
-publicación automática mediante GitHub Pages.
-
-## Deploy
-
-Proyecto publicado con GitHub Pages:
-
-[https://alxnrocha.github.io/casa-brasa-barcelona/](https://alxnrocha.github.io/casa-brasa-barcelona/)
-
-## Aviso
-
-Casa Brasa Barcelona es una marca ficticia creada para portfolio. El
-restaurante, los datos de contacto y la selección son demostrativos. La
-aplicación no realiza reservas, pedidos ni pagos.
-
-## Autor
-
-Alexandre Rocha
+**Autor:** [Alexandre Rocha](https://github.com/alxnrocha)
