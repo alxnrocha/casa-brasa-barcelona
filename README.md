@@ -12,18 +12,25 @@
 
 ---
 
-## ✨ Características Principales
+## 🌟 Visión General & Propuesta de Valor
 
-### 🚀 Experiencia de Usuario & Frontend
-- **Catálogo Gastronómico Interactivo:** 20 platos divididos en 5 categorías con información detallada de ingredientes y alérgenos.
-- **Búsqueda y Filtros Combinados:** Búsqueda normalizada por texto sin distinción de acentos y filtros multicriterio (vegetariano, sin gluten, picante, rango de precio).
-- **Gestión de Comanda y Subtotal Local:** Control de cantidades (1 a 10 unidades), cálculo automático de precios en Euros y panel lateral de selección.
-- **Modales Accesibles (WCAG):** Diálogos de detalle de plato accesibles por teclado con control de foco y cierre mediante tecla `Escape`.
-- **Diseño Mobile-First & Dark Elegance:** Paleta de colores cálida inspirada en brasa y gastronomía con tipografía moderna y micro-animaciones fluidas.
+**Casa Brasa Barcelona** es una Single Page Application (SPA) interactiva diseñada para la consulta gastronómica ágil en mesa mediante código QR.
+
+Permite a los comensales explorar platos categorizados, filtrar por intolerancias o preferencias dietéticas, calcular subtotales de comanda en tiempo real y visualizar detalles de cada elaboración en una interfaz Dark Elegance optimizada para móviles.
 
 ---
 
-## 🏛️ Estructura del Proyecto
+## ✨ Características Principales
+
+- **Catálogo Gastronómico Interactivo:** 20 platos divididos en 5 categorías con información de ingredientes y alérgenos.
+- **Búsqueda y Filtros Combinados:** Búsqueda normalizada por texto y filtros multicriterio (vegetariano, sin gluten, picante, rango de precio).
+- **Gestión de Comanda y Subtotal Local:** Control de cantidades (1 a 10 unidades), cálculo automático en Euros (€) y panel lateral de selección.
+- **Modales Accesibles (WCAG):** Diálogos de detalle de plato accesibles por teclado con control de foco y cierre con tecla `Escape`.
+- **Diseño Mobile-First & Dark Elegance:** Paleta cromática cálida inspirada en cocina a la brasa con tipografía moderna y micro-animaciones fluidas.
+
+---
+
+## 🏛️ Arquitectura del Proyecto
 
 ```text
 03-casa-brasa-barcelona/
@@ -34,6 +41,7 @@
 │   ├── types/                     # Definiciones e interfaces TypeScript
 │   ├── App.tsx                    # Componente raíz de la aplicación
 │   └── main.tsx                   # Punto de entrada de React
+├── LICENSE
 ├── package.json
 ├── tsconfig.json
 └── vite.config.ts
@@ -41,22 +49,45 @@
 
 ---
 
-## ⚡ Guía de Inicio Rápido
+## 🚀 Instalación y Puesta en Marcha
 
-### 1. Clonar el Repositorio
-```bash
-git clone https://github.com/alxnrocha/casa-brasa-barcelona.git
-cd casa-brasa-barcelona
-```
+### Prerrequisitos
+- Node.js `>= 20.0.0`
+- npm `>= 10.0.0`
 
-### 2. Instalar Dependencias y Ejecutar
-```bash
-npm install
-npm run dev
-```
+### Pasos
+
+1. **Clonar el repositorio:**
+   ```bash
+   git clone https://github.com/alxnrocha/casa-brasa-barcelona.git
+   cd casa-brasa-barcelona
+   ```
+
+2. **Instalar dependencias:**
+   ```bash
+   npm install
+   ```
+
+3. **Ejecutar en modo desarrollo:**
+   ```bash
+   npm run dev
+   ```
+
+4. **Compilar para producción:**
+   ```bash
+   npm run build
+   ```
+
+---
+
+## 🛡️ Calidad de Código & Testing
+
+- **Tipado Estricto:** TypeScript en modo estricto garantizando seguridad de tipos en todo el catálogo y comanda.
+- **Accesibilidad (a11y):** Diálogos modales con roles ARIA, trampas de foco y cierre con `Escape`.
+- **Rendimiento:** Carga optimizada de imágenes con Vite y Tailwind CSS v4.
 
 ---
 
 ## 📄 Licencia
 
-Este proyecto está bajo la Licencia MIT. Consulte el archivo [LICENSE](./LICENSE) para más detalles.
+Este proyecto se encuentra bajo la Licencia MIT. Consulta el archivo [LICENSE](LICENSE) para más detalles.
