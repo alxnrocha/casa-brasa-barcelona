@@ -1,15 +1,14 @@
 # Casa Brasa Barcelona — Carta Digital & Menú Gastronómico
 
-[![Demo GitHub Pages](https://img.shields.io/badge/Demo-GitHub_Pages-22c55e?style=for-the-badge&logo=github&logoColor=white)](https://alxnrocha.github.io/casa-brasa-barcelona/)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.8-blue.svg)](https://www.typescriptlang.org/)
-[![React](https://img.shields.io/badge/React-19.2-61dafb.svg)](https://react.dev/)
-[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-v4.0-38bdf8.svg)](https://tailwindcss.com/)
-[![License](https://img.shields.io/badge/License-MIT-green.svg)](./LICENSE)
+[![Live Demo](https://img.shields.io/badge/Live_Demo-GitHub_Pages-success?style=flat-square&logo=github&logoColor=white)](https://alxnrocha.github.io/casa-brasa-barcelona/)
+[![React 19](https://img.shields.io/badge/React-19.0-61DAFB?style=flat-square&logo=react&logoColor=black)](https://react.dev/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.8-3178C6?style=flat-square&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Tailwind CSS v4](https://img.shields.io/badge/Tailwind_CSS-v4.0-38B2AC?style=flat-square&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
+[![Vite](https://img.shields.io/badge/Vite-6.0-646CFF?style=flat-square&logo=vite&logoColor=white)](https://vitejs.dev/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](LICENSE)
 
-**Casa Brasa Barcelona** es una aplicación web tipo carta digital interactiva para un restaurante de cocina mediterránea contemporánea en Barcelona. Diseñada con enfoque *mobile-first* para consulta mediante código QR, permite explorar platos, filtrar por alérgenos y dietas, calcular subtotales y gestionar pedidos locales.
-
-- 🌐 **Demo en Vivo (GitHub Pages):** [https://alxnrocha.github.io/casa-brasa-barcelona/](https://alxnrocha.github.io/casa-brasa-barcelona/)
-- 📦 **Repositorio GitHub:** [https://github.com/alxnrocha/casa-brasa-barcelona](https://github.com/alxnrocha/casa-brasa-barcelona)
+> **Proyecto 03 del Portafolio Profesional** — Aplicación web de carta digital interactiva para restaurante de cocina mediterránea contemporánea en Barcelona.  
+> 🔗 **Demo en Vivo en GitHub Pages:** [https://alxnrocha.github.io/casa-brasa-barcelona/](https://alxnrocha.github.io/casa-brasa-barcelona/)
 
 ---
 
@@ -28,44 +27,32 @@
 
 ```text
 03-casa-brasa-barcelona/
-├── index.html                     # Entrypoint HTML5
+├── index.html
 ├── src/
-│   ├── assets/                    # Identidad de marca e imágenes de platos
-│   ├── components/                # Modales, filtros, cards de menú y comanda
-│   ├── data/                      # Catálogo tipado de productos y alérgenos
-│   ├── types/                     # Interfaces y tipos TypeScript
-│   ├── utils/                     # Utilidades de filtrado y formateo monetario
-│   ├── App.tsx                    # Shell principal de la aplicación
-│   └── index.css                  # Estilos globales y tokens Tailwind
-└── package.json                   # Scripts y dependencias
+│   ├── components/                # Componentes React (MenuGrid, PlateModal, OrderPanel)
+│   ├── data/                      # Fixtures gastronómicas estructuradas
+│   ├── types/                     # Definiciones e interfaces TypeScript
+│   ├── App.tsx                    # Componente raíz de la aplicación
+│   └── main.tsx                   # Punto de entrada de React
+├── package.json
+├── tsconfig.json
+└── vite.config.ts
 ```
 
 ---
 
 ## ⚡ Guía de Inicio Rápido
 
-### 1. Clonar e Instalar Dependencias
+### 1. Clonar el Repositorio
 ```bash
 git clone https://github.com/alxnrocha/casa-brasa-barcelona.git
 cd casa-brasa-barcelona
+```
+
+### 2. Instalar Dependencias y Ejecutar
+```bash
 npm install
-```
-
-### 2. Iniciar en Modo Desarrollo
-```bash
 npm run dev
-```
-
----
-
-## 🧪 Calidad de Código y Pruebas
-
-```bash
-# Análisis estático de código
-npm run lint
-
-# Compilar para producción
-npm run build
 ```
 
 ---
@@ -73,5 +60,3 @@ npm run build
 ## 📄 Licencia
 
 Este proyecto está bajo la Licencia MIT. Consulte el archivo [LICENSE](./LICENSE) para más detalles.
-
-**Autor:** [Alexandre Rocha](https://github.com/alxnrocha)
