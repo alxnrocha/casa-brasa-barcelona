@@ -1,4 +1,3 @@
-import { ProjectBadge } from './components/ProjectBadge';
 import { useRef, useState } from 'react'
 import { Footer } from './components/Footer'
 import { Header } from './components/Header'
@@ -90,7 +89,6 @@ export function App() {
         onQuantityChange={updateSelectionQuantity}
         onRemove={removeFromSelection}
       />
-          <ProjectBadge />
     </div>
   )
 }
